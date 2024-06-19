@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO LIST</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    .container{
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+        min-height: 100vh;
+        width: 100%;
+        padding: 10px;
+    }
+    #todo{
+        background-color: #fff;
+        width: 100%;
+        max-width: 550px;
+        padding: 30px;
+        border-radius: 10px;
+        margin: 150px auto 20px;
+    }
+    #todo svg{
+        width: 40px;
+        height:20px;
+    }
+    .task{
+        width: 100%;
+        background-color: #edeef0;
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        align-items: center;
+        border-radius: 30px;
+        margin-top: 20px;
+    }
+    input{
+        padding-left: 30px;
+        border: none;
+        height: 100%;
+        outline: none;
+        background-color: transparent;
+        font-size: 15px;
+    }
+    button{
+        border: none;
+        height: 100%;
+        border-radius: 30px;
+        background-color: rgb(30, 109, 226);
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        color: #ffff;
+        font-size: 16px;
+    }
+    button:hover{
+        background-color: rgb(45, 97, 158);
+    }
+    #todo ul{
+        margin-top: 20px;
+        list-style: none;
+    }
+    li{
+        padding: 0 5px 20px 30px;
+        position: relative;
+        cursor: pointer;
+    }
+    li::before{
+        content: '';
+        position: absolute;
+        left: 0;
+        height: 16px;
+        width: 16px;
+        border-radius: 50px;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktY2lyY2xlIiB2aWV3Qm94PSIwIDAgMTYgMTYiPgogIDxwYXRoIGQ9Ik04IDE1QTcgNyAwIDEgMSA4IDFhNyA3IDAgMCAxIDAgMTRtMCAxQTggOCAwIDEgMCA4IDBhOCA4IDAgMCAwIDAgMTYiLz4KPC9zdmc+")
+    }
+    li span{
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+        height: 30px;
+        text-align: center;
+        border-radius: 50%;
+        width: 30px;
+        font-size: 20px;
+        line-height: 30px;
+    }
+    li cancel:hover{
+        background-color: #edeef0;
+    }
+    li.checked{
+        color: #555;
+        text-decoration: line-through;
+    }
+    li.checked::before{
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktY2hlY2stY2lyY2xlIiB2aWV3Qm94PSIwIDAgMTYgMTYiPgogIDxwYXRoIGQ9Ik04IDE1QTcgNyAwIDEgMSA4IDFhNyA3IDAgMCAxIDAgMTRtMCAxQTggOCAwIDEgMCA4IDBhOCA4IDAgMCAwIDAgMTYiLz4KICA8cGF0aCBkPSJtMTAuOTcgNC45Ny0uMDIuMDIyLTMuNDczIDQuNDI1LTIuMDkzLTIuMDk0YS43NS43NSAwIDAgMC0xLjA2IDEuMDZMNi45NyAxMS4wM2EuNzUuNzUgMCAwIDAgMS4wNzktLjAybDMuOTkyLTQuOTlhLjc1Ljc1IDAgMCAwLTEuMDcxLTEuMDUiLz4KPC9zdmc+")
+    }
+    
+    
+
+</style>
+
+<body>
+    <div class="container">
+        <div id="todo">
+            <h2>To-Do List <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-check" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
+                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
+                </svg>
+            </h2>
+            <div class="task">
+                <input type="text" placeholder="Add your task" id="input">
+                <button onclick="addTask()">Add</button>
+            </div>
+
+            <ul id="tasklist">
+                <!-- <li class="checked">Javascript</li>
+                <li>Javascript</li>
+                <li>Javascript</li> -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const inputBox = document.getElementById('input');
+const taskList = document.getElementById('tasklist');
+
+function addTask(){
+    if(inputBox.value === ""){
+        alert("You must add a task!");
+    }
+    else{
+        let li = document.createElement('li');
+        li.innerHTML = inputBox.value;
+        taskList.appendChild(li)
+        let span = document.createElement('span');
+        span.innerHTML = '\u00d7';
+        li.appendChild(span);
+    }
+    inputBox.value = '';
+    saveTask()
+}
+
+taskList.addEventListener("click", function(e){
+    if(e.target.tagName === 'LI'){
+        e.target.classList.toggle('checked');
+        saveTask()
+    }
+    else if (e.target.tagName === "SPAN"){
+        e.target.parentElement.remove();
+        saveTask()
+    }
+}, false);
+
+function saveTask(){
+    localStorage.setItem("task", taskList.innerHTML);
+}
+
+function showTask(){
+    taskList.innerHTML = localStorage.getItem("task");
+}
+showTask()
+
+    </script>
+</body>
+</html>
